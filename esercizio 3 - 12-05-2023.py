@@ -2,12 +2,16 @@
 frase = input('Inserisci la frase da analizzare:\n')
 
 # pulizia della frase
-punteggiatura = "!'*+[]§#@.,;:?^"
+punteggiatura = "!'*+[]§#@.,;:?^-£$%&()="
 for carattere in punteggiatura:
     frase = frase.replace(carattere,'')
 
 # lista delle parole in maiuscolo da contare
 parole = frase.upper().split(' ')
+
+# pulizia di parole vuote
+while '' in parole:
+    parole.remove('')
 
 # dizionario delle parole
 conta_parole = dict()
@@ -18,8 +22,7 @@ for parola in parole:
         conta_parole[parola] = parole.count(parola)
 
 # stampa l'output
-# output
-print('Ecco a te il risultato della conta:\n')
+print('\nEcco a te il risultato della conta:')
 print()
 
 for chiave, valore in conta_parole.items():
