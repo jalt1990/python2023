@@ -3,14 +3,19 @@
    L'ordine degli elementi nella lista deve rimanere invariato'''
 
 # inizializzazione della lista numeri
-numeri = input("scrivi i numeri separati da una virgola:").replace(' ','').split(',')
+numeri = input("scrivi i numeri separati da una virgola:")
+numeri = numeri.replace(' ','')
+numeri = numeri.split(',')
 
 # inizializzazione della lista di output
-output = []
+output = [] # output = list() #lista
+
 
 # esplorazione della lista numeri e aggiunge in coda soltanto se non presente
 for numero in numeri:
-    if numero not in output:
+    if numero in output:
+        continue
+    else:
         output.append(numero)
 
 # output
