@@ -39,7 +39,7 @@ while not flag_start:
                     piatto = input("Inserisci il piatto: ")
                     prezzo = float(input("Inserisci il prezzo: "))
                     menu[piatto] = prezzo
-                    print(f"Hai aggiunto il piatto {piatto} a € {prezzo)} nel menu.")
+                    print(f"Hai aggiunto il piatto {piatto} a € {prezzo} nel menu.")
                 
                 # VISIONARE IL MENU
                 elif scelta_menu_1 == '2':
