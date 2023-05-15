@@ -25,6 +25,8 @@ print(oggetto_1.contenuto)
 print(oggetto_2.contenuto)
 print(oggetto_3.contenuto)
 
+print("\n\n\n")
+
 # creazione della classe contenente molti tipi
 class MultiType():
     numeroInt = 0
@@ -36,7 +38,7 @@ class MultiType():
 oggettoMultiType = MultiType()
 oggettoMultiType.numeroInt = 33
 oggettoMultiType.numeroFloat = 5.55
-oggettoMultiType.stringa = 'Ciao sono una stringa'
+oggettoMultiType.stringa = 'Franco'
 oggettoMultiType.booleano = True
 
 # mandare in stampa gli attributi
@@ -44,3 +46,9 @@ print(oggettoMultiType.numeroInt)
 print(oggettoMultiType.numeroFloat)
 print(oggettoMultiType.stringa)
 print(oggettoMultiType.booleano)
+
+# mandare in stampa con una sola print, usando magari il booleano come condizione
+if oggettoMultiType.booleano:
+    print(f"Ho {oggettoMultiType.numeroInt} anni, possiedo {oggettoMultiType.numeroFloat} euro sul conto e mi chiamo {oggettoMultiType.stringa}")
+
+
