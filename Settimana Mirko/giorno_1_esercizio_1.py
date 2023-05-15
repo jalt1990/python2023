@@ -10,19 +10,20 @@ Usare loop per fare
     in end: si chiude il programma
 """
 
-def somma(x, y):
-    return x + y
-
-def sottrazione(x, y):
-    return x - y
-
-def moltiplicazione(x, y):
-    return x * y
-
 # Creazione della classe Risposte:
 class Risposte:
     sommatoria = 0
     operazioni = ""
+    parziale = 0
+
+    def somma(self, x, y):
+        return x + y
+
+    def sottrazione(self, x, y):
+        return x - y
+
+    def moltiplicazione(self, x, y):
+        return x * y
 
 # Creazione di un oggetto di tipo Risposte:
 ans = Risposte()
@@ -33,15 +34,15 @@ flag_start = False
 # AVVIO LOOP MAIN
 while not flag_start:
     print("Ciao, scegli il numero dell' operazione da eseguire:")
-    print("1. CONTA\n2. STAMP\n3. ESCI")
+    print("1. CONTA\n2. STAMP\n3. PULISCI\n4. ESCI")
     scelta_main = input("Scelta: ")
 
     # AVVIO LOOP CONTA
     if scelta_main == "1":
-        conta_flag = 0
-        sommatoria = 0
-        while conta_flag < 3:
-            operazioni = ""
+        contatore = 0
+        ans.parziale = 0
+        while contatore < 3:
+            
             print("\nScegli l'operazione che vuoi eseguire:")
             print("1. ADDIZIONE\n2. SOTTRAZIONE\n3. MOLTIPLICAZIONE")
 
@@ -52,21 +53,27 @@ while not flag_start:
 
             # scelta dell'operazione matematica
             if scelta_conta == "1":
-                risultato = somma(numero_1, numero_2)
+                risultato = ans.somma(numero_1, numero_2)
                 ans.operazioni += f"{numero_1} + {numero_2} = {risultato}\n"
+
             elif scelta_conta == "2":
-                risultato = sottrazione(numero_1, numero_2)
+                risultato = ans.sottrazione(numero_1, numero_2)
                 ans.operazioni += f"{numero_1} - {numero_2} = {risultato}\n"
+
             elif scelta_conta == "3":
-                risultato = moltiplicazione(numero_1, numero_2)
+                risultato = ans.moltiplicazione(numero_1, numero_2)
                 ans.operazioni += f"{numero_1} * {numero_2} = {risultato}\n"
+
             else:
                 print("input errato, faccio io la somma :)")
-                risultato = somma(numero_1, numero_2)
+                risultato = ans.somma(numero_1, numero_2)
                 ans.operazioni += f"{numero_1} + {numero_2} = {risultato}\n"
-            conta_flag += 1
+
+            contatore += 1
+            ans.parziale += risultato
             ans.sommatoria += risultato
-        print(f"La sommatoria dei risultati è {ans.sommatoria}")
+
+        print(f"La sommatoria di questi risultati è {ans.parziale}")
         ans.operazioni += f"La sommatoria dei risultati è {ans.sommatoria}."
     
     # STAMPA DI TUTTE LE OPERAZIONI
@@ -76,7 +83,20 @@ while not flag_start:
         else:
             print(ans.operazioni)
     
+    # PULIZIA DELLE OPERAZIONI
     elif scelta_main == '3':
+        print("Sei sicuro di voler cancellare tutto?")
+        risposta = input("Si/No :")
+        if risposta == "Si":
+            ans.operazioni = ""
+            ans.sommatoria = 0
+        elif risposta == "No":
+            print("Nulla verrà cambiato")
+        else:
+            print("Non hai inserito un input accettabile")
+
+    # ESCI
+    elif scelta_main == '4':
         print("Grazie e arrivederci")
         flag_start = True
 
