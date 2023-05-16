@@ -8,14 +8,20 @@ Usare loop per fare
         alla fine stampa la somma dei 3 risultati
     in stamp: vengono stampate le operazioni singole e il totale
     in end: si chiude il programma
+
+    PARTE 2:
+    Aggiungere la possibilità di pulire i dati in memoria
 """
 
 # Creazione della classe Risposte:
 class Risposte:
+    # da riportare nella stampa delle operazioni di CONTA
+    parziale = 0
+    # da riportare nella stampa di STAMP
     sommatoria = 0
     operazioni = ""
-    parziale = 0
-
+    
+    # DEFINIZIONE DELLE OPERAZIONI MATEMATICHE
     def somma(self, x, y):
         return x + y
 
@@ -25,11 +31,12 @@ class Risposte:
     def moltiplicazione(self, x, y):
         return x * y
 
+# ======================== INIZIALIZZAZIONE OGGETTO E FLAG ===========================
+
 # Creazione di un oggetto di tipo Risposte:
 ans = Risposte()
 
 flag_start = False
-
 
 # AVVIO LOOP MAIN
 while not flag_start:
@@ -73,8 +80,8 @@ while not flag_start:
             ans.parziale += risultato
             ans.sommatoria += risultato
 
-        print(f"La sommatoria di questi risultati è {ans.parziale}")
-        ans.operazioni += f"La sommatoria dei risultati è {ans.sommatoria}."
+        print(f"La sommatoria di questi risultati è {ans.parziale}\n\n")
+        
     
     # STAMPA DI TUTTE LE OPERAZIONI
     elif scelta_main == '2':
@@ -82,6 +89,7 @@ while not flag_start:
             print("Non sono state fatte operazioni fino ad ora.")
         else:
             print(ans.operazioni)
+            print(f"La sommatoria dei risultati è {ans.sommatoria}.")
     
     # PULIZIA DELLE OPERAZIONI
     elif scelta_main == '3':

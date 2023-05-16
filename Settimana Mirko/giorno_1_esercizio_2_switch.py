@@ -4,14 +4,20 @@ CHE AL SUO INTERNO CONTENGA UN MENU
 """
 
 def conta():
-    return 'conta'
+    return 'Conta'
+
+def stampa():
+    return 'Stampa'
+
+def esci():
+    return 'Esci'
 
 def switch_menu(diz_comandi, msg_benvenuto):
-    # diz_comandi è un dizionario comando: istruzione
+    # diz_comandi è un dizionario {comando: istruzione}
     # msg_benvenuto è il messaggio di benvenuto
     print(msg_benvenuto)
-    for value in diz_comandi.values():
-        print(value)
+    for numero, funzione in diz_comandi.items():
+        print(f"{numero}. {funzione}")
     while True:
         arg = input('Inserisci la tua scelta :')
         if arg in diz_comandi:
@@ -21,10 +27,10 @@ def switch_menu(diz_comandi, msg_benvenuto):
     
 diz_comandi = {
     '1' : conta(),
-    '2' : "2. STAMPA",
-    '3' : "3. EXIT" 
+    '2' : stampa(),
+    '3' : esci() 
     }
 
-msg_benvenuto = 'Benvenuto nel programma,'
+msg_benvenuto = 'Benvenuto, questo è il menu funzioni:'
 
 print(switch_menu(diz_comandi, msg_benvenuto))
