@@ -1,11 +1,19 @@
 '''Simulazione ristorante'''
+# TASK: CREARE UN SISTEMA DI ORDINAMENTO AD OGGETTI
+# SI POSSONO ORDINARE MAX 4 PIATTI FISSI, MODIFICARE UN PIATTO, O AVERE IL CONTO
+# OGNI PIATTO HA NOME E PREZZO
+# SE CHIEDIAMO IL CONTO, CI DEVE CHIEDERE NOME E COGNOME E POI STAMPARE IL TOTALE E PIATTI A SCHERMO POI RITORNIAMO AL MENU INIZIALE
+# OGGETTO CON QUALI PIATTI, QUANTO HO SPESO, CHI HA SPESO
+# Vai a far si che si possa eliminare e aggiungere alla lista un piatto (parte 2)
+# Vai a far si che l'utente possa creare il suo profilo prima di poter ordinare (parte 3)
 
+# Classe cliente che contiene il nome, il conto_cliente e il budget
 class Cliente:
     def __init__(self):
-        self.nome = ""
-        self.cognome = ""
+        self.nominativo = ""
         self.conto_cliente = {'ordini':{}, 'totale':0.00}
         self.budget = 0.00
+
 
 # flag avvio programma
 flag_start = False
@@ -39,22 +47,24 @@ while not flag_start:
                 print()            
                 # EFFETTUARE ORDINI
                 cliente = Cliente()
-                cliente.nome = input("Inserisci il nome del cliente :")
-                cliente.cognome = input("Inserisci il cognome del cliente :")
+                cliente.nominativo = input("Inserisci il nome del cliente :")
                 cliente.budget = float(input("Inserisci il tuo budget: "))
-                while cliente.budget >= 5:
+                while cliente.budget > 6:
                     piatto = input("Inserisci il nome del piatto: ")
                     if piatto in menu:
                         quantita = int(input("Inserisci le quantita: "))
-                        if piatto not in cliente.conto_cliente['ordini']:
-                            cliente.conto_cliente['ordini'] |= {piatto : quantita}
-                            cliente.conto_cliente['totale'] += menu[piatto] * quantita
-                            cliente.budget -= cliente.conto_cliente['totale']
+                        if menu[piatto]*quantita < cliente.budget:
+                            if piatto not in cliente.conto_cliente['ordini']:
+                                cliente.conto_cliente['ordini'] |= {piatto : quantita}
+                                cliente.conto_cliente['totale'] += menu[piatto] * quantita
+                                cliente.budget -= cliente.conto_cliente['totale']
+                            else:
+                                quantita_pregressa = cliente.conto_cliente['ordini'][piatto]
+                                cliente.conto_cliente['ordini'] |= {piatto : quantita_pregressa + quantita}
+                                cliente.conto_cliente['totale'] += menu[piatto] * quantita
+                                cliente.budget -= cliente.conto_cliente['totale']
                         else:
-                            quantita_pregressa = cliente.conto_cliente['ordini'][piatto]
-                            cliente.conto_cliente['ordini'] |= {piatto : quantita_pregressa + quantita}
-                            cliente.conto_cliente['totale'] += menu[piatto] * quantita
-                            cliente.budget -= cliente.conto_cliente['totale']
+                            print('Non hai abbastanza budget per questo piatto')
                     else:
                         print("\nIl piatto scelto non è nel menu.\n")
                 print('Hai finito il tuo budget.')
@@ -78,7 +88,7 @@ while not flag_start:
                 for piatto, quantita in cliente.conto_cliente['ordini'].items():
                     print(f"{piatto} : {quantita} pz")
                 print("TOTALE : €", cliente.conto_cliente["totale"],"\n")
-                conti_clienti[cliente.nome + " " + cliente.cognome] = cliente.conto_cliente["totale"]
+                conti_clienti[cliente.nominativo] = cliente.conto_cliente["totale"]
                 # ESCI
                 print("\nArrivederci cliente\n\n")
                 flag_cliente = True
